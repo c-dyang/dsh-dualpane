@@ -4,47 +4,26 @@
         xmlns:wv2="clr-namespace:Microsoft.Web.WebView2.Wpf;assembly=Microsoft.Web.WebView2.Wpf"
         Title="DSH Dual Pane"
         Width="1400" Height="900"
-        WindowStartupLocation="CenterScreen"
-        Background="#1f2937">
+        Icon="favicon.ico"
+        WindowStartupLocation="Manual"
+        Background="#f3f4f6">
 
     <Grid>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="32"/>
-            <RowDefinition Height="*"/>
-        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="2*" MinWidth="300" x:Name="colLeft"/>
+            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition Width="*" MinWidth="250" x:Name="colRight"/>
+        </Grid.ColumnDefinitions>
 
-        <!-- 自定义标题栏 -->
-        <Border Grid.Row="0" Background="#111827" MouseLeftButtonDown="TitleBar_MouseLeftButtonDown">
-            <DockPanel>
-                <TextBlock Text="DSH 双栏" Foreground="#e5e7eb" VerticalAlignment="Center"
-                           Margin="10,0" FontSize="13"/>
-                <StackPanel DockPanel.Dock="Right" Orientation="Horizontal">
-                    <Button Content="_" Click="MinBtn_Click" Width="40" Height="28"
-                            Background="Transparent" Foreground="#e5e7eb" BorderThickness="0"/>
-                    <Button Content="X" Click="CloseBtn_Click" Width="40" Height="28"
-                            Background="Transparent" Foreground="#e5e7eb" BorderThickness="0"/>
-                </StackPanel>
-            </DockPanel>
-        </Border>
+        <!-- 左：DSH 对话 -->
+        <wv2:WebView2 x:Name="wvLeft" Grid.Column="0"/>
 
-        <!-- 双 WebView2 主体 -->
-        <Grid Grid.Row="1">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="2*" MinWidth="300" x:Name="colLeft"/>
-                <ColumnDefinition Width="Auto"/>
-                <ColumnDefinition Width="*" MinWidth="250"/>
-            </Grid.ColumnDefinitions>
+        <!-- 可拖分隔条（浅色） -->
+        <GridSplitter Grid.Column="1" Width="6"
+                      HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
+                      Background="#d1d5db" ShowsPreview="False"/>
 
-            <!-- 左：DSH 对话 -->
-            <wv2:WebView2 x:Name="wvLeft" Grid.Column="0"/>
-
-            <!-- 可拖分隔条 -->
-            <GridSplitter Grid.Column="1" Width="5"
-                          HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
-                          Background="#374151" ShowsPreview="False"/>
-
-            <!-- 右：历史注入搜索页 -->
-            <wv2:WebView2 x:Name="wvRight" Grid.Column="2"/>
-        </Grid>
+        <!-- 右：历史注入搜索页 -->
+        <wv2:WebView2 x:Name="wvRight" Grid.Column="2"/>
     </Grid>
 </Window>
