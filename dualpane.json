@@ -1,0 +1,4 @@
+{
+  "left": "http://192.168.0.25:3080",
+  "right": "http://192.168.0.25:7878/webhook/page?name=hist-search"
+}
